@@ -41,6 +41,15 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <finalName>${project.build.finalName}-BEAT</finalName>
+        </configuration>
+      </plugin>
+
       <!-- Compile version (1.5 for generics) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
