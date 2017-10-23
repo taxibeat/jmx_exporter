@@ -22,7 +22,7 @@
     </dependency>
     <dependency>
       <groupId>io.prometheus</groupId>
-      <artifactId>simpleclient_hotspot</artifactId>
+      <artifactId>simpleclient_hotspot_beat</artifactId>
       <version>0.0.26</version>
     </dependency>
     <dependency>
