@@ -1,6 +1,7 @@
 package io.prometheus.jmx;
 
 import io.prometheus.client.Collector;
+import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.Counter;
 
 import java.io.*;
@@ -13,6 +14,7 @@ import java.util.regex.Pattern;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
+import io.prometheus.client.hotspot.DefaultExports;
 import org.json.JSONObject;
 import org.yaml.snakeyaml.Yaml;
 
@@ -362,6 +364,7 @@ public class JmxCollector extends Collector implements Collector.Describable {
             help = matcher.replaceAll(rule.help);
           }
 
+
           // Set the labels.
           ArrayList<String> labelNames = new ArrayList<String>();
           ArrayList<String> labelValues = new ArrayList<String>();
@@ -395,7 +398,9 @@ public class JmxCollector extends Collector implements Collector.Describable {
                   if (appName == null || appId == null) {
                       try {
                           appId = labelValues.get(0);
+                          DefaultExports.setAppId(appId);
                           appName = getAppNameFromId(appId);
+                          DefaultExports.setAppName(appName);
                           labelNames.add("application_name");
                           labelValues.add(appName);
                       } catch (IOException ioe) {
@@ -425,6 +430,7 @@ public class JmxCollector extends Collector implements Collector.Describable {
 
     }
     public List<MetricFamilySamples> collect() {
+
       if (configFile != null) {
         long mtime = configFile.lastModified();
         if (mtime > config.lastUpdate) {
