@@ -1,0 +1,3 @@
+[submodule "client_java"]
+	path = client_java
+	url = git@github.com:taxibeat/client_java.git
